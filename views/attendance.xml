@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+
+        <record model="ir.ui.view" id="view_daily_attendance_form">
+            <field name="name">daily.attendance.form</field>
+            <field name="model">attendance.sheet</field>
+            <field name="arch" type="xml">
+                <form string="Hoja de Asistencia a Clase">
+                    <sheet>
+                        <separator string="Hoja de Asistencia a Clase"/>
+                        <group colspan="4" col="4">
+                            <field name="name"/>
+                            <field name="date"/>
+                            <field name="course_id" on_change="onchange_course_id(course_id)" widget="selection"/>
+                            <field name="level_id" widget="selection"/>
+                        </group>
+                        <notebook colspan="4">
+                            <page string="Estudiantes">
+                                <field name="student_ids" nolabel="1"
+                                       colspan="4">
+                                    <tree string="Estudiantes del curso" editable="top">
+                                        <field name="identification" required="1"/>
+                                        <field name="stud_id" required="1"/>
+                                        <field name="is_present"/>
+                                        <field name="is_late"/>
+                                    </tree>
+                                    <form string="Datos Estudiante">
+                                        <group col="4">
+                                            <field name="stud_id">
+                                                <field name="identification"/>
+                                                <field name="is_present"/>
+                                                <field name="is_late"/>
+                                            </field>
+                                        </group>
+                                    </form>
+                                </field>
+                                <group class="oe_subtotal_footer oe_right">
+                                    <field name="total_student" class="oe_subtotal_footer_separator"/>
+                                    <field name="total_presence"/>
+                                    <field name="total_absent"/>
+                                    <field name="total_late"/>
+                                </group>
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <!-- Standard Student Information Search View -->
+        <record model="ir.ui.view" id="view_daily_attendance_search">
+            <field name="name">daily.attendance.search</field>
+            <field name="model">attendance.sheet</field>
+            <field name="arch" type="xml">
+                <search string="Hojas de Asistencia a Clases">
+                    <group col="10" colspan="4">
+                        <separator orientation="vertical"/>
+                        <field name="course_id" select="1"/>
+                    </group>
+                    <newline/>
+                    <group expand="0" string="Agrupar Por..." colspan="12"
+                           col="10">
+                        <filter icon="terp-project" string="Horario" help="Horario"
+                                context="{'group_by':'course_id'}"/>
+                    </group>
+                </search>
+            </field>
+        </record>
+
+        <!-- Daily Attendance Information Tree View -->
+        <record model="ir.ui.view" id="view_daily_attendance_tree">
+            <field name="name">daily.attendance.tree</field>
+            <field name="model">attendance.sheet</field>
+            <field name="arch" type="xml">
+                <tree string="Hojas de Asistencia a Clase">
+                    <field name="name"/>
+                    <field name="date"/>
+                    <field name="course_id"/>
+                    <field name="student_ids">
+                        <field name="identification"/>
+                        <field name="stud_id"/>
+                    </field>
+                    <field name="total_presence"/>
+                    <field name="total_absent"/>
+                    <field name="total_late"/>
+                </tree>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="view_daily_attendance_graph">
+            <field name="name">daily.attendance.graph</field>
+            <field name="model">attendance.sheet</field>
+            <field name="arch" type="xml">
+                <graph type="pivot" string="Totales por Curso y Semana" stacked="True">
+                    <field name="date" interval="week" type="row"/>
+                    <field name="course_id" type="col"/>
+                    <field name="total_late" type="measure"/>
+                    <field name="total_absent" type="measure"/>
+                    <field name="total_presence" type="measure"/>
+                </graph>
+            </field>
+        </record>
+
+        <!-- Daily Attendance Information Action -->
+        <record model="ir.actions.act_window" id="action_daily_attendance_form">
+            <field name="name">Hojas de Asistencia a Clase</field>
+            <field name="res_model">attendance.sheet</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form,graph</field>
+        </record>
+    </data>
+</openerp>

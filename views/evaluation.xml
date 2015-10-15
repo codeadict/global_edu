@@ -1,0 +1,253 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+
+        <record model="ir.ui.view" id="view_homework_form">
+            <field name="name">homework.form</field>
+            <field name="model">homework.sheet</field>
+            <field name="arch" type="xml">
+                <form string="Notas Homework">
+                    <sheet>
+                        <separator string="Notas Homework"/>
+                        <group colspan="4" col="4">
+                            <field name="name"/>
+                            <field name="date"/>
+                            <field name="course_id" on_change="onchange_course_id(course_id)" widget="selection"/>
+                            <field name="level_id" widget="selection"/>
+                        </group>
+                        <notebook colspan="4">
+                            <page string="Estudiantes">
+                                <field name="student_ids" nolabel="1"
+                                       colspan="4">
+                                    <tree string="Estudiantes del curso" editable="top" create="false" delete="false">
+                                        <field name="identification" readonly="True"/>
+                                        <field name="stud_id" readonly="True"/>
+                                        <field name="rating" avg="Promedio Notas"/>
+                                    </tree>
+                                    <form string="Datos Estudiante">
+                                        <group col="4">
+                                            <field name="stud_id">
+                                                <field name="identification"/>
+                                                <field name="rating"/>
+                                            </field>
+                                        </group>
+                                    </form>
+                                </field>
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <!-- Standard Student Information Search View -->
+        <record model="ir.ui.view" id="view_homework_search">
+            <field name="name">homework.search</field>
+            <field name="model">homework.sheet</field>
+            <field name="arch" type="xml">
+                <search string="Homeworks">
+                    <group col="10" colspan="4">
+                        <separator orientation="vertical"/>
+                        <field name="course_id" select="1"/>
+                    </group>
+                    <newline/>
+                    <group expand="0" string="Agrupar Por..." colspan="12"
+                           col="10">
+                        <filter icon="terp-project" string="Horario" help="Horario"
+                                context="{'group_by':'course_id'}"/>
+                    </group>
+                </search>
+            </field>
+        </record>
+
+        <!-- Daily Attendance Information Tree View -->
+        <record model="ir.ui.view" id="view_homework_tree">
+            <field name="name">homework.tree</field>
+            <field name="model">homework.sheet</field>
+            <field name="arch" type="xml">
+                <tree string="Homeworks">
+                    <field name="name"/>
+                    <field name="date"/>
+                    <field name="course_id"/>
+                    <field name="student_ids">
+                        <field name="identification"/>
+                        <field name="stud_id"/>
+                    </field>
+                </tree>
+            </field>
+        </record>
+
+        <!-- Daily Attendance Information Action -->
+        <record model="ir.actions.act_window" id="action_homeworks">
+            <field name="name">Hojas de Notas Homework</field>
+            <field name="res_model">homework.sheet</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+
+        <!-- NOTAS GENERAL -->
+
+
+        <record model="ir.ui.view" id="view_qualification_form">
+            <field name="name">qualification.form</field>
+            <field name="model">qualification.sheet</field>
+            <field name="arch" type="xml">
+                <form string="Notas Generales del Curso">
+                    <header>
+                        <button name="action_fill_data" string="Cargar Datos" type="object" class="oe_highlight"/>
+                    </header>
+                    <sheet>
+                        <separator string="Notas Generales del Curso"/>
+                        <group colspan="4" col="4">
+                            <field name="course_id" widget="selection"/>
+                            <field name="level_id" widget="selection"/>
+                            <field name="cycle" widget="selection"/>
+                            <field name="seminary_ammount"/>
+                        </group>
+                        <notebook colspan="4">
+                            <page string="Quizzes">
+                                <field name="quiz_ids" nolabel="1" colspan="4">
+                                    <tree string="Quizzes" editable="top" create="false" delete="false">
+                                        <field name="identification" readonly="True"/>
+                                        <field name="stud_id" readonly="True"/>
+                                        <field name="quiz_1"/>
+                                        <field name="quiz_2"/>
+                                        <field name="quiz_3"/>
+                                        <field name="quiz_4"/>
+                                        <field name="quiz_avg" readonly="True"/>
+                                    </tree>
+                                    <form string="Datos Estudiante">
+                                        <group col="4">
+                                            <field name="stud_id">
+                                                <field name="identification"/>
+                                                <field name="quiz_1"/>
+                                                <field name="quiz_2"/>
+                                                <field name="quiz_3"/>
+                                                <field name="quiz_4"/>
+                                                <field name="quiz_avg" readonly="True"/>
+                                            </field>
+                                        </group>
+                                    </form>
+                                </field>
+                            </page>
+                            <page string="Homeworks">
+                                <field name="homework_ids" nolabel="1" colspan="4">
+                                    <tree string="Homeworks" editable="top" create="false" delete="false">
+                                        <field name="identification" readonly="True"/>
+                                        <field name="stud_id" readonly="True"/>
+                                        <field name="homework_interchange"/>
+                                        <field name="homework_practice"/>
+                                        <field name="homework_avg" readonly="True"/>
+                                    </tree>
+                                    <form string="Datos Estudiante">
+                                        <group col="4">
+                                            <field name="stud_id">
+                                                <field name="identification"/>
+                                                <field name="homework_interchange"/>
+                                                <field name="homework_practice"/>
+                                                <field name="homework_avg" readonly="True"/>
+                                            </field>
+                                        </group>
+                                    </form>
+                                </field>
+                            </page>
+                            <page string="Seminarios">
+                                <field name="seminary_ids" nolabel="1" colspan="4">
+                                    <tree string="Seminarios" editable="top" create="false" delete="false">
+                                        <field name="identification" readonly="True"/>
+                                        <field name="stud_id" readonly="True"/>
+                                        <field name="seminary_name"/>
+                                        <field name="oral"/>
+                                        <field name="vocabulary"/>
+                                        <field name="reading"/>
+                                        <field name="test_avg" readonly="True"/>
+                                    </tree>
+                                    <form string="Datos Estudiante">
+                                        <group col="4">
+                                            <field name="stud_id">
+                                                <field name="identification"/>
+                                                <field name="seminary_name"/>
+                                                <field name="oral"/>
+                                                <field name="vocabulary"/>
+                                                <field name="reading"/>
+                                                <field name="test_avg" readonly="True"/>
+                                            </field>
+                                        </group>
+                                    </form>
+                                </field>
+                            </page>
+                            <page string="Tests">
+                                <field name="test_ids" nolabel="1" colspan="4">
+                                    <tree string="Tests" editable="top" create="false" delete="false">
+                                        <field name="identification" readonly="True"/>
+                                        <field name="stud_id" readonly="True"/>
+                                        <field name="test_a"/>
+                                        <field name="test_b"/>
+                                    </tree>
+                                    <form string="Datos Estudiante">
+                                        <group col="4">
+                                            <field name="stud_id">
+                                                <field name="identification"/>
+                                                <field name="homework_interchange"/>
+                                                <field name="test_a"/>
+                                                <field name="test_b"/>
+                                            </field>
+                                        </group>
+                                    </form>
+                                </field>
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <!-- Standard Student Information Search View -->
+        <record model="ir.ui.view" id="view_qualification_search">
+            <field name="name">qualification.search</field>
+            <field name="model">qualification.sheet</field>
+            <field name="arch" type="xml">
+                <search string="Evaluaciones Generales">
+                    <group col="10" colspan="4">
+                        <separator orientation="vertical"/>
+                        <field name="course_id" select="1"/>
+                        <field name="level_id" select="1"/>
+                        <field name="cycle" select="1"/>
+                    </group>
+                    <newline/>
+                    <group expand="0" string="Agrupar Por..." colspan="12"
+                           col="10">
+                        <filter icon="terp-project" string="Horario" help="Horario"
+                                context="{'group_by':'course_id'}"/>
+                        <filter icon="terp-project" string="Nivel" help="Nivel"
+                                context="{'group_by':'level_id'}"/>
+                        <filter icon="terp-project" string="Ciclo" help="Ciclo"
+                                context="{'group_by':'cycle'}"/>
+                    </group>
+                </search>
+            </field>
+        </record>
+
+        <!-- Daily Attendance Information Tree View -->
+        <record model="ir.ui.view" id="view_qualification_tree">
+            <field name="name">qualification.tree</field>
+            <field name="model">qualification.sheet</field>
+            <field name="arch" type="xml">
+                <tree string="Homeworks">
+                    <field name="course_id"/>
+                    <field name="level_id"/>
+                    <field name="cycle"/>
+                </tree>
+            </field>
+        </record>
+
+        <!-- Daily Attendance Information Action -->
+        <record model="ir.actions.act_window" id="action_qualifications">
+            <field name="name">Ingreso Notas Generales por Curso</field>
+            <field name="res_model">qualification.sheet</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+    </data>
+</openerp>

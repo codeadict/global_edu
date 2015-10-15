@@ -1,0 +1,340 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+        <!-- Courses Tree View -->
+        <record model="ir.ui.view" id="view_global_course_tree">
+            <field name="name">global.course.tree</field>
+            <field name="model">global.course</field>
+            <field name="arch" type="xml">
+                <tree string="Horarios">
+                    <field name="code"/>
+                    <field name="name"/>
+                    <field name="description"/>
+                </tree>
+            </field>
+        </record>
+
+        <!-- Courses Form View -->
+        <record model="ir.ui.view" id="view_global_course_form">
+            <field name="name">global.course.form</field>
+            <field name="model">global.course</field>
+            <field name="arch" type="xml">
+                <form string="Horario">
+                    <sheet>
+                        <group>
+                            <field name="code"/>
+                            <field name="name"/>
+                        </group>
+                        <separator/>
+                        <group colspan="4">
+                            <label for="description" string="Descripción"/>
+                            <field name="description" nolabel="1"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <!-- Courses Search View -->
+        <record model="ir.ui.view" id="view_global_course_filter">
+            <field name="name">global.course.filter</field>
+            <field name="model">global.course</field>
+            <field name="arch" type="xml">
+                <search string="Buscar Cursos">
+                    <field name="code"/>
+                    <field name="name"/>
+                </search>
+            </field>
+        </record>
+
+        <!-- Courses Action -->
+        <record model="ir.actions.act_window" id="global_all_courses">
+            <field name="name">Cursos</field>
+            <field name="res_model">global.course</field>
+            <field name="view_mode">tree,form</field>
+            <field name="domain">[]</field>
+            <field name="view_id" ref="view_global_course_tree"/>
+            <field name="search_view_id" ref="view_global_course_filter"/>
+            <field name="context">{}</field>
+            <field name="help" type="html">
+                <p>
+                    Pulse para agregar cursos y asignar profesores a los mismos.
+                </p>
+            </field>
+        </record>
+
+
+        <!-- Levels Tree View -->
+        <record model="ir.ui.view" id="view_global_level_tree">
+            <field name="name">global.level.tree</field>
+            <field name="model">global.level</field>
+            <field name="arch" type="xml">
+                <tree string="Niveles">
+                    <field name="code"/>
+                    <field name="name"/>
+                </tree>
+            </field>
+        </record>
+
+        <!-- Levels Form View -->
+        <record model="ir.ui.view" id="view_global_level_form">
+            <field name="name">global.level.form</field>
+            <field name="model">global.level</field>
+            <field name="arch" type="xml">
+                <form string="Nivel">
+                    <sheet>
+                        <group>
+                            <field name="code"/>
+                            <field name="name"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <!-- Levels Search View -->
+        <record model="ir.ui.view" id="view_global_level_filter">
+            <field name="name">global.level.filter</field>
+            <field name="model">global.level</field>
+            <field name="arch" type="xml">
+                <search string="Buscar Niveles">
+                    <field name="code"/>
+                    <field name="name"/>
+                </search>
+            </field>
+        </record>
+
+        <!-- Levels Action -->
+        <record model="ir.actions.act_window" id="global_all_levels">
+            <field name="name">Niveles</field>
+            <field name="res_model">global.level</field>
+            <field name="view_mode">tree,form</field>
+            <field name="domain">[]</field>
+            <field name="view_id" ref="view_global_level_tree"/>
+            <field name="search_view_id" ref="view_global_level_filter"/>
+            <field name="context">{}</field>
+            <field name="help" type="html">
+                <p>
+                    Pulse para agregar niveles.
+                </p>
+            </field>
+        </record>
+
+
+        <!-- Relationships Tree View -->
+        <record model="ir.ui.view" id="view_global_relationship_tree">
+            <field name="name">global.relationship.tree</field>
+            <field name="model">student.relation.master</field>
+            <field name="arch" type="xml">
+                <tree string="Relaciones">
+                    <field name="name"/>
+                </tree>
+            </field>
+        </record>
+
+        <!-- Relationships Form View -->
+        <record model="ir.ui.view" id="view_global_relationship_form">
+            <field name="name">global.relationship.form</field>
+            <field name="model">student.relation.master</field>
+            <field name="arch" type="xml">
+                <form string="Relación">
+                    <sheet>
+                        <group>
+                            <field name="name"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <!-- Relationships Search View -->
+        <record model="ir.ui.view" id="view_global_relationship_filter">
+            <field name="name">global.relationship.filter</field>
+            <field name="model">student.relation.master</field>
+            <field name="arch" type="xml">
+                <search string="Buscar Relaciones">
+                    <field name="name"/>
+                </search>
+            </field>
+        </record>
+
+        <!-- Relationships Action -->
+        <record model="ir.actions.act_window" id="global_all_relationships">
+            <field name="name">Relaciones</field>
+            <field name="res_model">student.relation.master</field>
+            <field name="view_mode">tree,form</field>
+            <field name="domain">[]</field>
+            <field name="view_id" ref="view_global_relationship_tree"/>
+            <field name="search_view_id" ref="view_global_relationship_filter"/>
+            <field name="context">{}</field>
+            <field name="help" type="html">
+                <p>
+                    Acá se agregan las relaciones de una referencia con un alumno, ej. Padre, Madre, Amigo, Tía, etc...
+                </p>
+            </field>
+        </record>
+
+
+        <!-- Materials Tree View -->
+        <record model="ir.ui.view" id="view_global_material_tree">
+            <field name="name">global.material.tree</field>
+            <field name="model">student.material.master</field>
+            <field name="arch" type="xml">
+                <tree string="Materiales">
+                    <field name="name"/>
+                </tree>
+            </field>
+        </record>
+
+        <!-- Materials Form View -->
+        <record model="ir.ui.view" id="view_global_material_form">
+            <field name="name">global.material.form</field>
+            <field name="model">student.material.master</field>
+            <field name="arch" type="xml">
+                <form string="Material">
+                    <sheet>
+                        <group>
+                            <field name="name"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <!-- Materials Search View -->
+        <record model="ir.ui.view" id="view_global_material_filter">
+            <field name="name">global.material.filter</field>
+            <field name="model">student.material.master</field>
+            <field name="arch" type="xml">
+                <search string="Buscar Materiales">
+                    <field name="name"/>
+                </search>
+            </field>
+        </record>
+
+        <!-- Materials Action -->
+        <record model="ir.actions.act_window" id="global_all_materials">
+            <field name="name">Materiales</field>
+            <field name="res_model">student.material.master</field>
+            <field name="view_mode">tree,form</field>
+            <field name="domain">[]</field>
+            <field name="view_id" ref="view_global_material_tree"/>
+            <field name="search_view_id" ref="view_global_material_filter"/>
+            <field name="context">{}</field>
+            <field name="help" type="html">
+                <p>
+                    Acá se agregan los materiales que se deben entregar al alumno, ej. Lápices, Cartulina, Cuaderno,
+                    etc...
+                </p>
+            </field>
+        </record>
+
+
+        <!-- Institutions Tree View -->
+        <record model="ir.ui.view" id="view_global_institution_tree">
+            <field name="name">global.institution.tree</field>
+            <field name="model">global.institutes.master</field>
+            <field name="arch" type="xml">
+                <tree string="Instituciones">
+                    <field name="name"/>
+                </tree>
+            </field>
+        </record>
+
+        <!-- Institutions Form View -->
+        <record model="ir.ui.view" id="view_global_institution_form">
+            <field name="name">global.institution.form</field>
+            <field name="model">global.institutes.master</field>
+            <field name="arch" type="xml">
+                <form string="Institución">
+                    <sheet>
+                        <group>
+                            <field name="name"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <!-- Institutions Search View -->
+        <record model="ir.ui.view" id="view_global_institution_filter">
+            <field name="name">global.institution.filter</field>
+            <field name="model">global.institutes.master</field>
+            <field name="arch" type="xml">
+                <search string="Buscar Instituciones">
+                    <field name="name"/>
+                </search>
+            </field>
+        </record>
+
+        <!-- Institutions Action -->
+        <record model="ir.actions.act_window" id="global_all_institutions">
+            <field name="name">Instituciones</field>
+            <field name="res_model">global.institutes.master</field>
+            <field name="view_mode">tree,form</field>
+            <field name="domain">[]</field>
+            <field name="view_id" ref="view_global_institution_tree"/>
+            <field name="search_view_id" ref="view_global_institution_filter"/>
+            <field name="context">{}</field>
+            <field name="help" type="html">
+                <p>
+                    Acá se manejan las instituciones o colegios de donde provienen los estudiantes.
+                </p>
+            </field>
+        </record>
+
+
+        <!-- Reference Source Tree View -->
+        <record model="ir.ui.view" id="view_global_referred_tree">
+            <field name="name">global.referred.tree</field>
+            <field name="model">global.referred.sources</field>
+            <field name="arch" type="xml">
+                <tree string="Fuentes de Referencia">
+                    <field name="name"/>
+                </tree>
+            </field>
+        </record>
+
+        <!-- Reference Source Form View -->
+        <record model="ir.ui.view" id="view_global_referred_form">
+            <field name="name">global.referred.form</field>
+            <field name="model">global.referred.sources</field>
+            <field name="arch" type="xml">
+                <form string="Fuente de Referencia">
+                    <sheet>
+                        <group>
+                            <field name="name"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <!-- Reference Source Search View -->
+        <record model="ir.ui.view" id="view_global_referred_filter">
+            <field name="name">global.referred.filter</field>
+            <field name="model">global.referred.sources</field>
+            <field name="arch" type="xml">
+                <search string="Buscar Fuentes de Referencia">
+                    <field name="name"/>
+                </search>
+            </field>
+        </record>
+
+        <!-- Reference Source Action -->
+        <record model="ir.actions.act_window" id="global_all_referred">
+            <field name="name">Fuentes de Referencia</field>
+            <field name="res_model">global.referred.sources</field>
+            <field name="view_mode">tree,form</field>
+            <field name="domain">[]</field>
+            <field name="view_id" ref="view_global_referred_tree"/>
+            <field name="search_view_id" ref="view_global_referred_filter"/>
+            <field name="context">{}</field>
+            <field name="help" type="html">
+                <p>
+                    Acá se manejan las fuentes que refirieron a los estudiantes, ej. Publicidad, Redes Sociales, Amigos, etc...
+                </p>
+            </field>
+        </record>
+    </data>
+</openerp>

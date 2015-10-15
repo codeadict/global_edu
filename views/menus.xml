@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+        <menuitem id="global_edu.main" name="Gestión Estudiantil" sequence="0"/>
+
+        <!-- Sub Menus -->
+        <menuitem name="Estudiantes" id="menu_all_students" parent="global_edu.main" sequence="1"
+                  action="global_all_students"/>
+
+        <menuitem name="Asistencia" id="global_edu.attendance" parent="global_edu.main" sequence="2"/>
+
+        <menuitem name="Registro de Notas" id="global_edu.evaluations" parent="global_edu.main" sequence="3"/>
+
+        <menuitem name="Configuración" id="global_edu.configuration" parent="global_edu.main" sequence="10"/>
+
+        <!-- Configuration Menus -->
+        <menuitem name="Horarios" id="menu_all_courses" parent="global_edu.configuration" sequence="1"
+                  action="global_all_courses"/>
+
+        <menuitem name="Niveles" id="menu_all_levels" parent="global_edu.configuration" sequence="2"
+                  action="global_all_levels"/>
+
+        <menuitem name="Parentescos" id="menu_all_relationships" parent="global_edu.configuration" sequence="3"
+                  action="global_all_relationships"/>
+
+        <menuitem name="Materiales" id="menu_all_materials" parent="global_edu.configuration" sequence="4"
+                  action="global_all_materials"/>
+
+        <menuitem name="Instituciones de procedencia" id="menu_all_institutions" parent="global_edu.configuration"
+                  sequence="5"
+                  action="global_all_institutions"/>
+
+        <menuitem name="Fuentes de Referidos" id="menu_all_referred" parent="global_edu.configuration" sequence="6"
+                  action="global_all_referred"/>
+
+        <!--Attendance Menus -->
+        <menuitem name="Toma de Asistencia" id="menu_class_attendance" parent="global_edu.attendance" sequence="1"
+                  action="action_daily_attendance_form"/>
+
+        <!--Evaluation Menus -->
+        <menuitem name="Notas Homeworks" id="menu_homework_evaluation" parent="global_edu.evaluations" sequence="1"
+                  action="action_homeworks"/>
+        <menuitem name="Notas Generales del Nivel" id="menu_homework_general_evaluation" parent="global_edu.evaluations" sequence="1"
+                  action="action_qualifications"/>
+    </data>
+</openerp>
